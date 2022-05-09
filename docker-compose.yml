@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  db:
+    image: "postgres:12.10-alpine3.15"
+    container_name: chat-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: chatapp
+      POSTGRES_PASSWORD: svelte
+      POSTGRES_DB: chat
+    volumes:
+      - db:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: chat-app
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://chatapp:svelte@db:5432/chat?schema=public
+
+volumes:
+  db:

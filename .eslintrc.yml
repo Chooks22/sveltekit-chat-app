@@ -1,0 +1,19 @@
+---
+env:
+  node: true
+plugins:
+  - "svelte3"
+extends:
+  - "@chookslint/typescript/strict"
+  - "@chookslint/typescript/types"
+parserOptions:
+  project: "./tsconfig.lint.json"
+  sourceType: module
+overrides:
+  - files: "*.svelte"
+    processor: "svelte3/svelte3"
+    env:
+      shared-node-browser: true
+  - files: "*.d.ts"
+    rules:
+      "spaced-comment": off

@@ -1,0 +1,18 @@
+# Defaults
+.DS_Store
+node_modules
+
+# Svelte
+dist
+package
+.svelte-kit
+
+# Yarn 3
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+
+# Env
+.env
+.env.*
+!.env.sample
