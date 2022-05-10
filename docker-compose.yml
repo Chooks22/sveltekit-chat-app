@@ -19,6 +19,7 @@ services:
     ports:
       - "8000:8000"
     environment:
+      PORT: 8000
       DATABASE_URL: postgresql://chatapp:svelte@db:5432/chat?schema=public
 
 volumes:
