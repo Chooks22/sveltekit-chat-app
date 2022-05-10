@@ -16,4 +16,5 @@ overrides:
       shared-node-browser: true
   - files: "*.d.ts"
     rules:
+      "@typescript-eslint/consistent-type-imports": off
       "spaced-comment": off
