@@ -1,3 +1,3 @@
 module.exports = {
-  content: ['./src/**/*.svelte'],
+  content: ['./src/**/*.svelte', './src/app.html'],
 }
