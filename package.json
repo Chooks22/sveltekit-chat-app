@@ -15,7 +15,8 @@
     "lint": "eslint --ignore-path .gitignore ."
   },
   "dependencies": {
-    "@prisma/client": "3.13.0"
+    "@prisma/client": "3.13.0",
+    "hash-wasm": "^4.9.0"
   },
   "devDependencies": {
     "@chookslint/eslint-config-typescript": "^2.2.1",
