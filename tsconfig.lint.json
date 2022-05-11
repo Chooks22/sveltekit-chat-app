@@ -4,6 +4,7 @@
     ".eslintrc.cjs",
     "svelte.config.js",
     "*.cjs",
+    "*.d.ts",
     "src"
   ]
 }

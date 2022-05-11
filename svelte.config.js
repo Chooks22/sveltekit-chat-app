@@ -11,8 +11,12 @@ const config = {
       resolve: {
         alias: [
           {
-            find: '@components',
+            find: '$components',
             replacement: resolve('./src/components'),
+          },
+          {
+            find: '$lib',
+            replacement: resolve('./src/lib'),
           },
         ],
       },

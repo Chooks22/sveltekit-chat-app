@@ -9,4 +9,8 @@ declare namespace App {
     messages: import('@prisma/client').PrismaClient['message']
     users: import('@prisma/client').PrismaClient['user']
   }
+  interface Session {
+    id: string
+    username: string
+  }
 }

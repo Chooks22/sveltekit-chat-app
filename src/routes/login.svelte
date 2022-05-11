@@ -1,27 +1,40 @@
+<script context="module" lang="ts">
+  import type { Load } from "@sveltejs/kit";
+  export const load: Load = ({ session }) => {
+    if (session.id) {
+      return { redirect: "/", status: 302 };
+    }
+
+    return {};
+  };
+</script>
+
 <script lang="ts">
-  interface User {
-    id: string;
-    username: string;
-  }
+  import { goto } from "$app/navigation";
+  import { session } from "$app/stores";
+  import type { AuthBody, AuthResult } from "./api/v1/_types";
 
   let username = "";
   let password = "";
 
   async function login() {
+    const body: AuthBody = {
+      username,
+      password,
+    };
+
     const res = await fetch("/api/v1/auth/login", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
+      body: JSON.stringify(body),
     });
 
     if (res.ok) {
-      const data: { user: User } = await res.json();
-      console.log("login:", data.user.id);
+      const data: AuthResult = await res.json();
+      session.set(data.user);
+      await goto("/");
     } else {
       console.error("login:", res.status, res.statusText);
     }

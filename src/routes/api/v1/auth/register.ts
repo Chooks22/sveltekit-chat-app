@@ -1,19 +1,21 @@
+import { cookiefyToken } from '$lib/cookies'
+import { createToken } from '$lib/jwt'
 import type { RequestHandler } from '@sveltejs/kit'
 import { argon2id } from 'hash-wasm'
 import { randomBytes } from 'node:crypto'
+import type { AuthBody, AuthResult } from '../_types'
 import { timeout } from './_utils'
 
-interface RequestBody {
-  username: string
-  password: string
-}
-
-const post: RequestHandler = async ({ locals, request }) => {
+// @ts-ignore svelte dumb types
+// eslint-disable-next-line @typescript-eslint/ban-types
+const post: RequestHandler<{}, AuthResult> = async ({ locals, request }) => {
   const denied = timeout(403)
 
-  const body = await request.json() as RequestBody
+  const body = await request.json() as AuthBody
   const count = await locals.users.count({
-    where: { username: body.username },
+    where: {
+      username: body.username,
+    },
   })
 
   if (count > 0) {
@@ -41,9 +43,23 @@ const post: RequestHandler = async ({ locals, request }) => {
     },
   })
 
+  const payload: App.Session = {
+    id: user.id,
+    username: user.username,
+  }
+
+  const [token, err] = await createToken(payload)
+  if (err) {
+    console.error('register:', err)
+    return { status: 500 }
+  }
+
   return {
+    headers: {
+      'set-cookie': cookiefyToken(token),
+    },
     body: {
-      user,
+      user: payload,
     },
   }
 }
