@@ -1,6 +1,7 @@
 # Defaults
 .DS_Store
 node_modules
+docker-compose.yml
 
 # Svelte
 dist
