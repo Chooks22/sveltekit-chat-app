@@ -30,7 +30,7 @@
   }
 
   onMount(() => {
-    const chat = new ChatClient("ws://192.168.1.222:3001");
+    const chat = new ChatClient(`ws://${location.hostname}:3001`);
     chat.on("message", (chat) => {
       chats.push(chat);
       chats = chats;
