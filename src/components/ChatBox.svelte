@@ -5,7 +5,7 @@
   export let value: string;
 </script>
 
-<span class="absolute w-full bottom-0 flex gap-2 px-4 py-2">
+<span class="absolute bottom-0 flex w-full gap-2 px-4 py-2">
   <SoloInput type="text" id="chat-box" label="Chat" labelHidden bind:value />
-  <IconButton>send</IconButton>
+  <IconButton type="submit">send</IconButton>
 </span>

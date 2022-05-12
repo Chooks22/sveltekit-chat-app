@@ -33,3 +33,11 @@ export async function authenticate(type: 'login' | 'register', credentials: Auth
   const data = await res.json() as AuthResult
   return data.user
 }
+
+export async function logout(): Promise<boolean> {
+  const res = await fetch('/api/v1/auth/logout', {
+    method: 'POST',
+  })
+
+  return res.ok
+}

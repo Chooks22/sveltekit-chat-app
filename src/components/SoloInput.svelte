@@ -43,5 +43,6 @@
   {name}
   {value}
   on:input={input}
-  class="w-full h-10 py-2 px-3 bg-zinc-700 text-white rounded-full shadow shadow-zinc-900"
+  autocomplete="off"
+  class="w-full h-10 px-3 py-2 text-white rounded-full shadow bg-zinc-700 shadow-zinc-900"
 />

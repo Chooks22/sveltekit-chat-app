@@ -5,7 +5,7 @@
   import { sendMessage } from "$lib/api";
   import { ChatClient } from "$lib/chat";
   import type { Message } from "@prisma/client";
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import type { Chat } from "./_types";
 
   export let messages: Message[];
@@ -24,11 +24,17 @@
     user: userList.get(msg.userId)!,
   }));
 
+  async function scrollToBottom() {
+    await tick();
+    chatWindow.scrollTo(0, chatWindow.scrollHeight);
+  }
+
   onMount(() => {
-    const chat = new ChatClient("ws://127.0.0.1:3001");
-    chat.on("message", async (chat) => {
+    const chat = new ChatClient("ws://192.168.1.222:3001");
+    chat.on("message", (chat) => {
       chats.push(chat);
       chats = chats;
+      scrollToBottom();
     });
   });
 
@@ -38,14 +44,14 @@
       const ok = await sendMessage($session.id, message);
       if (ok) {
         message = "";
-        chatWindow.scrollTo(0, chatWindow.scrollHeight);
+        scrollToBottom();
       }
     }
   };
 </script>
 
 <form
-  class="flex flex-col w-full h-full relative"
+  class="relative flex flex-col w-full h-full"
   on:submit|preventDefault={submit}
 >
   <ChatWindow {chats} bind:self={chatWindow} />

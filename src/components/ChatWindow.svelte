@@ -11,7 +11,10 @@
   });
 </script>
 
-<ul class="flex flex-col gap-2 px-4 pt-2 pb-14 overflow-auto" bind:this={self}>
+<ul
+  class="flex flex-col h-screen gap-2 px-4 pt-2 overflow-auto pb-14"
+  bind:this={self}
+>
   {#each chats as chat}
     <ChatItem {chat} />
   {/each}

@@ -34,7 +34,7 @@
 
 <form
   action="post"
-  class="flex flex-col gap-2 w-1/2 mx-auto items-center"
+  class="flex flex-col items-center w-1/2 gap-2 mx-auto"
   on:submit|preventDefault={login}
 >
   <span>
@@ -50,7 +50,8 @@
       bind:value={password}
     />
   </span>
-  <button type="submit" class="bg-purple-500 px-4 py-1 rounded shadow">
+  <a href="/register">Don't have an account yet?</a>
+  <button type="submit" class="px-4 py-1 bg-purple-500 rounded shadow">
     Login
   </button>
 </form>
