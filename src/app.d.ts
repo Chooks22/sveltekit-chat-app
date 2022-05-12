@@ -5,6 +5,7 @@
  */
 declare namespace App {
   interface Locals {
+    wss: import('$lib/ws').default
     prisma: import('@prisma/client').PrismaClient
     messages: import('@prisma/client').PrismaClient['message']
     users: import('@prisma/client').PrismaClient['user']

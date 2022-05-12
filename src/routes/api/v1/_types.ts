@@ -6,3 +6,8 @@ export interface AuthBody {
   username: string
   password: string
 }
+
+export interface MessageBody {
+  userId: string
+  content: string
+}

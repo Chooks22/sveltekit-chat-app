@@ -12,31 +12,22 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { session } from "$app/stores";
-  import type { AuthBody, AuthResult } from "./api/v1/_types";
+  import { authenticate } from "$lib/api";
 
   let username = "";
   let password = "";
 
   async function login() {
-    const body: AuthBody = {
+    const user = await authenticate("login", {
       username,
       password,
-    };
-
-    const res = await fetch("/api/v1/auth/login", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(body),
     });
 
-    if (res.ok) {
-      const data: AuthResult = await res.json();
-      session.set(data.user);
-      await goto("/");
+    if (user !== null) {
+      $session = user;
+      goto("/");
     } else {
-      console.error("login:", res.status, res.statusText);
+      console.error("login: fail");
     }
   }
 </script>

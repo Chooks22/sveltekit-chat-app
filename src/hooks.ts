@@ -1,10 +1,15 @@
 import { verifyToken } from '$lib/jwt'
+import WebSocketServer from '$lib/ws'
 import prisma from '@prisma/client'
 import type { GetSession, Handle } from '@sveltejs/kit'
 import { parse } from 'cookie'
 
 process.env.DATABASE_URL ??= 'postgresql://'
 const client = new prisma.PrismaClient()
+
+const wss = new WebSocketServer({
+  port: 3001,
+})
 
 const getSession: GetSession = async ({ request }) => {
   const cookie = request.headers.get('cookie')
@@ -30,6 +35,7 @@ const getSession: GetSession = async ({ request }) => {
 
 const handle: Handle = ({ event, resolve }) => {
   event.locals = {
+    wss,
     prisma: client,
     messages: client.message,
     users: client.user,

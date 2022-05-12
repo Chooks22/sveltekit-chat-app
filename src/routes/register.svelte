@@ -12,7 +12,7 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { session } from "$app/stores";
-  import type { AuthBody, AuthResult } from "./api/v1/_types";
+  import { authenticate } from "$lib/api";
 
   let username = "";
   let password = "";
@@ -23,25 +23,16 @@
       return;
     }
 
-    const body: AuthBody = {
+    const user = await authenticate("register", {
       username,
       password,
-    };
-
-    const res = await fetch("/api/v1/auth/register", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(body),
     });
 
-    if (res.ok) {
-      const data: AuthResult = await res.json();
-      session.set(data.user);
-      await goto("/");
+    if (user !== null) {
+      $session = user;
+      goto("/");
     } else {
-      console.error("register:", res.status, res.statusText);
+      console.error("register: fail");
     }
   }
 </script>
