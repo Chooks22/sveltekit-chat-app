@@ -5,7 +5,7 @@
 
 <span
   on:click
-  class={`flex items-center justify-between h-10 gap-6 px-2 cursor-pointer whitespace-nowrap ${
+  class={`flex items-center justify-between h-10 gap-6 px-2 cursor-pointer whitespace-nowrap transition-colors duration-75 ease-in-out ${
     style === "danger" ? "bg-red-600 hover:bg-red-500" : "hover:bg-zinc-500"
   }`}
 >

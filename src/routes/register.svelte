@@ -13,6 +13,9 @@
   import { goto } from "$app/navigation";
   import { session } from "$app/stores";
   import { authenticate } from "$lib/api";
+  import OutlinedInput from "$components/OutlinedInput.svelte";
+  import Link from "$components/Link.svelte";
+  import ContainedButton from "$components/ContainedButton.svelte";
 
   let username = "";
   let password = "";
@@ -39,33 +42,24 @@
 
 <form
   action="post"
-  class="flex flex-col items-center w-1/2 gap-2 mx-auto"
+  class="flex flex-col items-center gap-4 p-4 mx-auto my-12 rounded-md shadow-md w-max bg-zinc-800 shadow-zinc-900"
   on:submit|preventDefault={register}
 >
-  <span>
-    <label class="block" for="username">Username</label>
-    <input type="text" id="username" name="username" bind:value={username} />
-  </span>
-  <span>
-    <label class="block" for="password">Password</label>
-    <input
-      type="password"
-      id="password"
-      name="password"
-      bind:value={password}
-    />
-  </span>
-  <span>
-    <label class="block" for="password-test">Re-enter Password</label>
-    <input
-      type="password"
-      id="password-test"
-      name="password-test"
-      bind:value={test}
-    />
-  </span>
-  <a href="/login">Already have an account?</a>
-  <button type="submit" class="px-4 py-1 bg-purple-500 rounded shadow">
-    Register
-  </button>
+  <h1 class="self-start text-2xl">Register</h1>
+  <OutlinedInput label="Username" id="username" bind:value={username} />
+  <OutlinedInput
+    type="password"
+    label="Password"
+    id="password"
+    bind:value={password}
+  />
+  <OutlinedInput
+    type="password"
+    label="Re-enter Password"
+    id="password-test"
+    name="password-test"
+    bind:value={test}
+  />
+  <Link href="/login">Already have an account?</Link>
+  <ContainedButton type="submit">Register</ContainedButton>
 </form>

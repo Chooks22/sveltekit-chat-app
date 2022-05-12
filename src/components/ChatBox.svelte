@@ -6,6 +6,13 @@
 </script>
 
 <span class="absolute bottom-0 flex w-full gap-2 px-4 py-2">
-  <SoloInput type="text" id="chat-box" label="Chat" labelHidden bind:value />
+  <SoloInput
+    type="text"
+    id="chat-box"
+    label="Chat"
+    placeholder="Send a message..."
+    labelHidden
+    bind:value
+  />
   <IconButton type="submit">send</IconButton>
 </span>

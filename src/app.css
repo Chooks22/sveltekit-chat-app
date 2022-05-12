@@ -2,10 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color: #fff;
+@layer components {
+  .pseudo-fill {
+    @apply absolute top-0 left-0 w-full h-full;
+  }
+
+  .pseudo-underline, .pseudo-underlined {
+    @apply absolute bottom-0 w-full h-px transition-transform scale-x-0 bg-purple-500;
+  }
+
+  .pseudo-underlined {
+    @apply scale-x-100;
+  }
 }
 
-input {
-  color: #000;
+:root {
+  color: #fff;
 }

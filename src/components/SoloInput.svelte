@@ -1,28 +1,5 @@
 <script lang="ts">
-  type InputType =
-    | "button"
-    | "checkbox"
-    | "color"
-    | "date"
-    | "datetime"
-    | "datetime-local"
-    | "email"
-    | "file"
-    | "hidden"
-    | "image"
-    | "month"
-    | "number"
-    | "password"
-    | "radio"
-    | "range"
-    | "reset"
-    | "search"
-    | "submit"
-    | "tel"
-    | "text"
-    | "time"
-    | "url"
-    | "week";
+  import type { InputType } from "./_types";
 
   export let value = "";
   export let type: InputType = "text";
@@ -30,6 +7,7 @@
   export let id: string;
   export let name = id;
   export let labelHidden = false;
+  export let placeholder = "";
 
   const input = (e: Event) => {
     value = (e.currentTarget as HTMLInputElement).value;
@@ -42,7 +20,8 @@
   {id}
   {name}
   {value}
+  {placeholder}
   on:input={input}
   autocomplete="off"
-  class="w-full h-10 px-3 py-2 text-white rounded-full shadow bg-zinc-700 shadow-zinc-900"
+  class="w-full h-10 px-4 py-2 text-white rounded-full shadow outline-none bg-zinc-700 shadow-zinc-900"
 />

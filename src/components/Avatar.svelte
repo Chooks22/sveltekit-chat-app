@@ -1,5 +1,6 @@
 <script lang="ts">
-  type Size = "sm" | "md" | "lg";
+  import type { Size } from "./_types";
+
   export let user: App.Session;
   export let size: Size = "md";
 
